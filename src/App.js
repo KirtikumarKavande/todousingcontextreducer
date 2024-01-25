@@ -3,6 +3,7 @@ import ShowTodo from "./components/ShowTodo";
 import TodoContext from "./context/TodoContex.js";
 import Todo from "./components/Todo.js";
 import todoReducer from "./reducers/todoReducer.js";
+import AddTodo from "./components/AddTodo.js";
 
 const App = () => {
   const todoList = [
@@ -15,14 +16,17 @@ const App = () => {
       id: 2,
     },
   ];
-  const[state,dispatch]=useReducer(todoReducer,todoList)
+  const [allTodo, dispatch] = useReducer(todoReducer, todoList);
   return (
-      <TodoContext.Provider value={{state,dispatch}}>
-      {
-        todoList.map((item)=><Todo name={item.name} />)
-      }
-        
+    <>
+      <TodoContext.Provider value={{ allTodo, dispatch }}>
+        <AddTodo />
+
+        {allTodo.map((item) => (
+          <Todo name={item.name} id={item.id} />
+        ))}
       </TodoContext.Provider>
+    </>
   );
 };
 

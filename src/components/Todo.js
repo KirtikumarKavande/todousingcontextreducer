@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import TodoContext from "../context/TodoContex";
 
-const Todo = ({ name }) => {
+const Todo = ({ name, id }) => {
+  const { dispatch } = useContext(TodoContext);
+
+  const deleteTodo = () => {
+    dispatch({
+      type: "deleteTodo",
+      id
+    });
+  };
   return (
     <div className="todo-list">
       <p>{name}</p>
       <button>Edit</button>
-      <button>delete</button>
+      <button onClick={deleteTodo}>delete</button>
     </div>
   );
 };
